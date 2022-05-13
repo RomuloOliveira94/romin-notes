@@ -19,4 +19,21 @@ export const useStoreNotes = defineStore("notes", {
       ],
     };
   },
+  actions: {
+    addNote(content: string, title: string) {
+      const currentDate = new Date().getTime();
+      const id = currentDate.toString();
+      const note = {
+        id,
+        title: title,
+        content: content,
+      };
+      this.notes.unshift(note);
+    },
+    deleteNote(id: string) {
+      this.notes = this.notes.filter((notes) => {
+        return notes.id !== id;
+      });
+    },
+  },
 });

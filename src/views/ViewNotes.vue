@@ -1,5 +1,18 @@
 <template>
   <div class="notes">
+    <AddEditNote v-model="newNoteValue" ref="addEditNoteRef" bg-color="dark">
+      <template #buttons>
+        <button
+          class="button is-link has-background-secondary"
+          @click="addNote"
+          :disabled="!newNoteValue.title || !newNoteValue.content"
+        >
+          Add New Note
+        </button>
+      </template>
+    </AddEditNote>
+
+    <!--
     <div class="has-background-dark p-3 mb-5 card">
       <div class="field">
         <label class="label has-text-white">Title</label>
@@ -36,42 +49,33 @@
         </div>
       </div>
     </div>
+    -->
 
     <NotesComponent
       v-for="note in storeNotes.notes"
       :key="note.id"
       :note="note"
-      @delete-note="deleteNote"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 import NotesComponent from "../components/Notes/NotesComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
+import AddEditNote from "../components/Notes/AddEditNote.vue";
 
 const storeNotes = useStoreNotes();
-const newNoteTitle = ref("");
-const newNote = ref("");
-const newNoteRef = ref();
-const addNote = () => {
-  let currentDate = new Date().getTime();
-  let id = currentDate.toString();
+const addEditNoteRef = ref();
 
-  let note = {
-    id,
-    title: newNoteTitle.value,
-    content: newNote.value,
-  };
-  storeNotes.notes.unshift(note);
-  newNote.value = "";
-  newNoteTitle.value = "";
-  newNoteRef.value.focus();
-};
-const deleteNote = (noteId: string) => {
-  storeNotes.notes = storeNotes.notes.filter((notes) => {
-    return notes.id !== noteId;
-  });
+const newNoteValue = reactive({
+  title: "",
+  content: "",
+});
+const addNote = () => {
+  storeNotes.addNote(newNoteValue.content, newNoteValue.title);
+  newNoteValue.content = "";
+  newNoteValue.title = "";
+  addEditNoteRef.value.focusTextArea();
 };
 </script>
