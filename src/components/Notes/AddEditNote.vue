@@ -11,6 +11,8 @@
             ref="textAreaRef"
             v-model="modelValue.title"
             @input="$emit('update:modelValue', modelValue)"
+            v-autofocus
+            maxlength="50"
           />
         </div>
       </div>
@@ -19,9 +21,10 @@
         <div class="control">
           <textarea
             class="textarea"
-            placeholder="Add a new note"
+            :placeholder="placeholderContent"
             v-model="modelValue.content"
             @input="$emit('update:modelValue', modelValue)"
+            maxlength="150"
           ></textarea>
         </div>
       </div>
@@ -38,15 +41,16 @@
 <script setup lang="ts">
 import type { newNoteValue } from "@/types/NewNoteValue";
 import { ref } from "vue";
+import { vAutofocus } from "@/directives/vAutofocus";
 
 const textAreaRef = ref();
 
 const props = defineProps<{
   modelValue: newNoteValue;
   bgColor: string;
+  placeholderContent: string;
 }>();
 
-console.log(props.bgColor);
 defineEmits(["update:modelValue"]);
 
 const focusTextArea = () => {

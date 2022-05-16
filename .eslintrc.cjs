@@ -12,5 +12,5 @@ module.exports = {
   env: {
     "vue/setup-compiler-macros": true,
   },
-  rules: { "vue/no-mutanting-props": "off" },
+  rules: { "vue/no-mutating-props": "off" },
 };

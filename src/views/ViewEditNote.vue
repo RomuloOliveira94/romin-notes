@@ -1,11 +1,19 @@
 <template>
   <div class="edit-note">
-    <AddEditNote v-model="newNoteValue" ref="addEditNoteRef" bg-color="link">
+    <AddEditNote
+      v-model="noteContent"
+      ref="addEditNoteRef"
+      bg-color="link"
+      placeholder-content="Edit the note"
+    >
       <template #buttons>
+        <button class="button is-link is-light mr-2" @click="$router.back()">
+          Cancel
+        </button>
         <button
           class="button is-link has-background-dark"
-          @click="addNote"
-          :disabled="!newNoteValue.title || !newNoteValue.content"
+          :disabled="!noteContent.title || !noteContent.content"
+          @click="handleSaveEdit"
         >
           Save Note
         </button>
@@ -17,11 +25,26 @@
 <script setup lang="ts">
 import { reactive } from "vue";
 import AddEditNote from "../components/Notes/AddEditNote.vue";
+import { useStoreNotes } from "@/stores/storeNotes";
+import { useRoute, useRouter } from "vue-router";
 
-const newNoteValue = reactive({
+const route = useRoute();
+const router = useRouter();
+
+const storeNotes = useStoreNotes();
+
+const noteContent = reactive({
   title: "",
   content: "",
 });
-</script>
 
-<style scoped></style>
+const noteId = Number(route.params.id);
+
+noteContent.content = storeNotes.getNoteContent(noteId);
+noteContent.title = storeNotes.getNoteTitle(noteId);
+
+const handleSaveEdit = () => {
+  storeNotes.updateNote(noteId, noteContent);
+  router.push("/");
+};
+</script>

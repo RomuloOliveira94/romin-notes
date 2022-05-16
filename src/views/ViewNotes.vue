@@ -1,55 +1,21 @@
 <template>
   <div class="notes">
-    <AddEditNote v-model="newNoteValue" ref="addEditNoteRef" bg-color="dark">
+    <AddEditNote
+      v-model="newNoteValues"
+      ref="addEditNoteRef"
+      bg-color="dark"
+      placeholder-content="Type something..."
+    >
       <template #buttons>
         <button
           class="button is-link has-background-secondary"
           @click="addNote"
-          :disabled="!newNoteValue.title || !newNoteValue.content"
+          :disabled="!newNoteValues.title || !newNoteValues.content"
         >
           Add New Note
         </button>
       </template>
     </AddEditNote>
-
-    <!--
-    <div class="has-background-dark p-3 mb-5 card">
-      <div class="field">
-        <label class="label has-text-white">Title</label>
-        <div class="control">
-          <input
-            class="input"
-            type="text"
-            placeholder="Note title"
-            v-model="newNoteTitle"
-            ref="newNoteRef"
-          />
-        </div>
-      </div>
-      <div class="field">
-        <label class="label has-text-white">Note</label>
-        <div class="control">
-          <textarea
-            class="textarea"
-            placeholder="Add a new note"
-            v-model="newNote"
-          ></textarea>
-        </div>
-      </div>
-
-      <div class="field is-grouped is-grouped-right">
-        <div class="control">
-          <button
-            class="button is-link has-background-secondary"
-            @click="addNote"
-            :disabled="!newNote || !newNoteTitle"
-          >
-            Add New Note
-          </button>
-        </div>
-      </div>
-    </div>
-    -->
 
     <NotesComponent
       v-for="note in storeNotes.notes"
@@ -64,18 +30,22 @@ import { reactive, ref } from "vue";
 import NotesComponent from "../components/Notes/NotesComponent.vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import AddEditNote from "../components/Notes/AddEditNote.vue";
+import { useWatchCharacters } from "@/composable/useWatchCharacters";
+import type { newNoteValue } from "@/types/NewNoteValue";
 
 const storeNotes = useStoreNotes();
 const addEditNoteRef = ref();
 
-const newNoteValue = reactive({
+const newNoteValues: newNoteValue = reactive({
   title: "",
   content: "",
 });
 const addNote = () => {
-  storeNotes.addNote(newNoteValue.content, newNoteValue.title);
-  newNoteValue.content = "";
-  newNoteValue.title = "";
+  storeNotes.addNote(newNoteValues.content, newNoteValues.title);
+  newNoteValues.content = "";
+  newNoteValues.title = "";
   addEditNoteRef.value.focusTextArea();
 };
+
+useWatchCharacters(newNoteValues, 150);
 </script>

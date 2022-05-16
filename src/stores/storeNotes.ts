@@ -1,3 +1,4 @@
+import type { newNoteValue } from "./../types/NewNoteValue";
 import { defineStore } from "pinia";
 
 export const useStoreNotes = defineStore("notes", {
@@ -5,16 +6,16 @@ export const useStoreNotes = defineStore("notes", {
     return {
       notes: [
         {
-          id: "1",
+          id: 0,
           title: "My first note",
           content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius eni, asdushaduhas, daidasda amet consectetur adipisicing elit amet consectetur adipisicing elit amet consectetur adipisicing elit",
+            "nota1 dolor sit, amet consectetur adipisicing elit. Eius eni, asdushaduhas, daidasda amet consectetur adipisicing elit amet consectetur adipisicing elit amet consectetur adipisicing elit",
         },
         {
-          id: "2",
+          id: 1,
           title: "My second note",
           content:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius eni, asdushaduhas, daidasda amet consectetur adipisicing elit amet consectetur adipisicing elit amet consectetur adipisicing elit",
+            "nota2 ipsum dolor sit, amet consectetur adipisicing elit. Eius eni, asdushaduhas, daidasda amet consectetur adipisicing elit amet consectetur adipisicing elit amet consectetur adipisicing elit",
         },
       ],
     };
@@ -22,7 +23,7 @@ export const useStoreNotes = defineStore("notes", {
   actions: {
     addNote(content: string, title: string) {
       const currentDate = new Date().getTime();
-      const id = currentDate.toString();
+      const id = currentDate;
       const note = {
         id,
         title: title,
@@ -30,10 +31,35 @@ export const useStoreNotes = defineStore("notes", {
       };
       this.notes.unshift(note);
     },
-    deleteNote(id: string) {
+    deleteNote(id: number) {
       this.notes = this.notes.filter((notes) => {
         return notes.id !== id;
       });
+    },
+    updateNote(id: number, content: newNoteValue) {
+      const index = this.notes.findIndex((note) => note.id === id);
+      this.notes[index].content = content.content;
+      this.notes[index].title = content.title;
+    },
+  },
+  getters: {
+    getNoteContent: (state) => {
+      return (id: number) => {
+        return state.notes.filter((content) => content.id === id)[0].content;
+      };
+    },
+    getNoteTitle: (state) => {
+      return (id: number) => {
+        return state.notes.filter((title) => title.id === id)[0].title;
+      };
+    },
+    totalNotesCount: (state) => {
+      return state.notes.length;
+    },
+    totalCharactersCount: (state) => {
+      return state.notes.reduce((acc, note) => {
+        return (acc += note.content.length);
+      }, 0);
     },
   },
 });
