@@ -3,12 +3,12 @@
     <AddEditNote
       v-model="newNoteValues"
       ref="addEditNoteRef"
-      bg-color="dark"
+      bg-color="warning"
       placeholder-content="Type something..."
     >
       <template #buttons>
         <button
-          class="button is-link has-background-secondary"
+          class="button is-link has-background-primary"
           @click="addNote"
           :disabled="!newNoteValues.title || !newNoteValues.content"
         >

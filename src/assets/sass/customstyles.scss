@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+// Import a Google Font
+
+// Set your brand colors
+$purple: #220b57;
+$yellow: #fbc00d;
+
+// Update Bulma's global variables
+$primary: $purple;
+$warning: $yellow;
+
+
+// Update some of Bulma's component variables
+
+
+// Import only what you need from Bulma
+@import "../../../node_modules/bulma/sass/utilities/_all.sass";
+@import "../../../node_modules/bulma/sass/base/_all";
+@import "../../../node_modules/bulma/sass/elements/_all";
+@import "../../../node_modules/bulma/sass/form/_all";
+@import "../../../node_modules/bulma/sass/components/_all";
+@import "../../../node_modules/bulma/sass/grid/_all";
+@import "../../../node_modules/bulma/sass/helpers/_all";
+@import "../../../node_modules/bulma/sass/layout/_all";

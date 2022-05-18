@@ -8,6 +8,6 @@
 <script setup lang="ts">
 import NavBarVue from "./components/Layout/NavBar.vue";
 </script>
-<style>
-@import "bulma/css/bulma.min.css";
+<style lang="scss">
+@import "./assets/sass/customstyles.scss";
 </style>

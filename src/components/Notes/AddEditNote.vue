@@ -2,7 +2,7 @@
   <div>
     <div class="p-3 mb-5 card" :class="`has-background-${props.bgColor}`">
       <div class="field">
-        <label class="label has-text-white">Title</label>
+        <label class="label has-text-black">Title</label>
         <div class="control">
           <input
             class="input"
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="field">
-        <label class="label has-text-white">Note</label>
+        <label class="label has-text-black">Note</label>
         <div class="control">
           <textarea
             class="textarea"
