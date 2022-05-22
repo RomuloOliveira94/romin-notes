@@ -25,7 +25,11 @@
           >Delete</a
         >
       </footer>
-      <NotesDeleteModalVue v-if="modals.deleteNote" />
+      <NotesDeleteModalVue
+        v-if="modals.deleteNote"
+        v-model="modals.deleteNote"
+        :noteId="note.id"
+      />
     </div>
   </div>
 </template>
@@ -33,10 +37,7 @@
 <script setup lang="ts">
 import { computed, reactive } from "vue";
 import type { Note } from "../../types/Note";
-import { useStoreNotes } from "@/stores/storeNotes";
 import NotesDeleteModalVue from "./NotesDeleteModal.vue";
-
-const storeNotes = useStoreNotes();
 
 const props = defineProps<{
   note: Note;
@@ -52,5 +53,3 @@ const modals = reactive({
   deleteNote: false,
 });
 </script>
-
-<style scoped></style>

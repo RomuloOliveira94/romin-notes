@@ -1,20 +1,56 @@
 <template>
-  <div class="modal is-active">
+  <div class="modal is-active p-2">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div class="modal-card" ref="modalCardRef">
       <header class="modal-card-head">
         <p class="modal-card-title">Modal title</p>
-        <button class="delete" aria-label="close"></button>
+        <button class="delete" aria-label="close" @click="closeModal"></button>
       </header>
       <section class="modal-card-body">
         Are you sure you want to delete this note?
       </section>
       <footer class="modal-card-foot is-justify-content-flex-end">
-        <button class="button is-primary">Save changes</button>
-        <button class="button is-danger">Cancel</button>
+        <button class="button is-danger" @click="closeModal">Cancel</button>
+        <button class="button is-primary" @click="deleteNote">Delete</button>
       </footer>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useStoreNotes } from "@/stores/storeNotes";
+import { onClickOutside } from "@vueuse/core";
+import { onMounted, onUnmounted, ref } from "vue";
+const storeNotes = useStoreNotes();
+
+const modalCardRef = ref(null);
+
+const props = defineProps<{
+  modelValue: boolean;
+  noteId: number;
+}>();
+
+const emit = defineEmits(["update:modelValue"]);
+
+const closeModal = () => {
+  emit("update:modelValue", false);
+};
+
+const handleCloseWithEsc = (e: KeyboardEvent) => {
+  if (e.key === "Escape") return closeModal();
+};
+
+onMounted(() => {
+  document.addEventListener("keyup", handleCloseWithEsc);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keyup", handleCloseWithEsc);
+});
+
+onClickOutside(modalCardRef, closeModal);
+
+const deleteNote = () => {
+  storeNotes.deleteNote(props.noteId);
+};
+</script>
