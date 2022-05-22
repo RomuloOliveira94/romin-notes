@@ -2,7 +2,7 @@
   <div>
     <div class="p-3 mb-5 card" :class="`has-background-${props.bgColor}`">
       <div class="field">
-        <label class="label has-text-black">Title</label>
+        <label :class="`label has-text-${props.textColor}`">Title</label>
         <div class="control">
           <input
             class="input"
@@ -17,14 +17,14 @@
         </div>
       </div>
       <div class="field">
-        <label class="label has-text-black">Note</label>
+        <label :class="`label has-text-${props.textColor}`">Note</label>
         <div class="control">
           <textarea
             class="textarea"
             :placeholder="placeholderContent"
             v-model="modelValue.content"
             @input="$emit('update:modelValue', modelValue)"
-            maxlength="150"
+            maxlength="200"
           ></textarea>
         </div>
       </div>
@@ -49,6 +49,7 @@ const props = defineProps<{
   modelValue: newNoteValue;
   bgColor: string;
   placeholderContent: string;
+  textColor: string;
 }>();
 
 defineEmits(["update:modelValue"]);

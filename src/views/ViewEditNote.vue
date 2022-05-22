@@ -3,15 +3,16 @@
     <AddEditNote
       v-model="noteContent"
       ref="addEditNoteRef"
-      bg-color="link"
+      bg-color="primary"
       placeholder-content="Edit the note"
+      text-color="white"
     >
       <template #buttons>
         <button class="button is-link is-light mr-2" @click="$router.back()">
           Cancel
         </button>
         <button
-          class="button is-link has-background-dark"
+          class="button is-link has-background-warning has-text-black"
           :disabled="!noteContent.title || !noteContent.content"
           @click="handleSaveEdit"
         >

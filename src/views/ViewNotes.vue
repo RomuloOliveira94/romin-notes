@@ -5,6 +5,7 @@
       ref="addEditNoteRef"
       bg-color="warning"
       placeholder-content="Type something..."
+      text-color="black"
     >
       <template #buttons>
         <button
@@ -47,5 +48,5 @@ const addNote = () => {
   addEditNoteRef.value.focusTextArea();
 };
 
-useWatchCharacters(newNoteValues, 150);
+useWatchCharacters(newNoteValues, 200);
 </script>
