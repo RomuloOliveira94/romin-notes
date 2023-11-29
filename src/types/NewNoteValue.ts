@@ -1,4 +1,4 @@
 export interface newNoteValue {
-    title: string;
-    content: string;
-  }
+  title: string;
+  content: string;
+}

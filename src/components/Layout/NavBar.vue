@@ -2,7 +2,7 @@
   <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="container is-max-desktop px-2">
       <div class="navbar-brand">
-        <img src="../../../public/rnotes-nobg.png" width="150"/>
+        <img src="../../../public/rnotes-nobg.png" width="150" />
         <a
           role="button"
           class="navbar-burger"

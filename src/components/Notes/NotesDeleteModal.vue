@@ -10,8 +10,8 @@
         Are you sure you want to delete this note?
       </section>
       <footer class="modal-card-foot is-justify-content-flex-end">
-        <button class="button is-danger" @click="closeModal">Cancel</button>
         <button class="button is-primary" @click="deleteNote">Delete</button>
+        <button class="button is-danger" @click="closeModal">Cancel</button>
       </footer>
     </div>
   </div>
