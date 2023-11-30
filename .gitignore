@@ -29,7 +29,6 @@ coverage
 *.sw?
 
 .firebase
-.github
 .vscode
 .firebaserc
-firebase.json
+
