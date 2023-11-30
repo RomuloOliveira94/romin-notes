@@ -31,22 +31,6 @@
         ref="navBarRef"
       >
         <div class="navbar-start">
-          <!-- <RouterLink
-            @click="showMobileNav = false"
-            class="navbar-item"
-            to="/"
-            active-class="is active"
-          >
-            Notes
-          </RouterLink>
-          <RouterLink
-            @click="showMobileNav = false"
-            class="navbar-item"
-            to="/stats"
-            active-class="is active"
-          >
-            Stats
-          </RouterLink> -->
           <div class="navbar-item">
             <button
               class="button is-small is-warning"
@@ -74,26 +58,6 @@
           >
             Stats
           </RouterLink>
-          <!-- <div class="buttons">
-             <RouterLink
-                @click="showMobileNav = false"
-                class="navbar-item button is-warning"
-                to="/auth"
-                active-class="is active"
-                v-if="!storeAuth.user?.id"
-              >
-                <strong>Sign up</strong>
-              </RouterLink>
-              <RouterLink
-                @click="showMobileNav = false"
-                class="navbar-item button is-warning"
-                to="/auth"
-                active-class="is active"
-                v-if="!storeAuth.user?.id"
-              >
-                <strong>Login</strong>
-              </RouterLink>
-            </div> -->
         </div>
       </div>
     </div>
