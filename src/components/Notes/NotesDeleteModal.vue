@@ -27,7 +27,7 @@ const modalCardRef = ref(null);
 
 const props = defineProps<{
   modelValue: boolean;
-  noteId: number;
+  noteId: string;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
