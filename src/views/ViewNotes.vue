@@ -18,11 +18,26 @@
       </template>
     </AddEditNote>
 
-    <NotesComponent
-      v-for="note in storeNotes.notes"
-      :key="note.id"
-      :note="note"
-    />
+    <progress
+      v-if="!storeNotes.loadingNotes"
+      class="progress is-warning is-large"
+      max="100"
+    ></progress>
+
+    <template v-else>
+      <NotesComponent
+        v-for="note in storeNotes.notes"
+        :key="note.id"
+        :note="note"
+      />
+
+      <div
+        v-if="!storeNotes.notes.length"
+        class="is-size-4 has-text-centered has-text-grey-light is-family-monospace py-6"
+      >
+        No notes...
+      </div>
+    </template>
   </div>
 </template>
 
@@ -35,6 +50,7 @@ import { useWatchCharacters } from "@/composable/useWatchCharacters";
 import type { newNoteValue } from "@/types/NewNoteValue";
 
 const storeNotes = useStoreNotes();
+
 const addEditNoteRef = ref();
 
 const newNoteValues: newNoteValue = reactive({
