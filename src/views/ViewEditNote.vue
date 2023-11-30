@@ -24,28 +24,29 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
-import AddEditNote from "../components/Notes/AddEditNote.vue";
-import { useStoreNotes } from "@/stores/storeNotes";
-import { useRoute, useRouter } from "vue-router";
+  import { reactive, onMounted, ref } from "vue";
+  import AddEditNote from "../components/Notes/AddEditNote.vue";
+  import { useStoreNotes } from "@/stores/storeNotes";
+  import { useRoute, useRouter } from "vue-router";
 
-const route = useRoute();
-const router = useRouter();
+  const route = useRoute();
+  const router = useRouter();
 
-const storeNotes = useStoreNotes();
+  const storeNotes = useStoreNotes();
 
-const noteContent = reactive({
-  title: "",
-  content: "",
-});
+  const noteContent = reactive({
+    title: "",
+    content: "",
+  });
+  const noteId = route.params.id;
 
-const noteId = Number(route.params.id);
+  onMounted(() => {
+    noteContent.content = storeNotes.getNoteContent(noteId);
+    noteContent.title = storeNotes.getNoteTitle(noteId);
+  });
 
-noteContent.content = storeNotes.getNoteContent(noteId);
-noteContent.title = storeNotes.getNoteTitle(noteId);
-
-const handleSaveEdit = () => {
-  storeNotes.updateNote(noteId, noteContent);
-  router.push("/");
-};
+  const handleSaveEdit = () => {
+    storeNotes.updateNote(noteId, noteContent);
+    router.push("/");
+  };
 </script>
