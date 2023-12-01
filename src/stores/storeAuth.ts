@@ -36,11 +36,11 @@ export const useStoreAuth = defineStore("auth", {
             email: user.email,
           };
           storeNotes.init();
+          storeLang.init();
           this.router.push({ name: "notes" });
         } else {
           this.user = {};
           storeNotes.clearNotes();
-          storeLang.clearLang();
           this.router.push({ name: "auth" });
         }
         this.loading = false;
@@ -52,6 +52,7 @@ export const useStoreAuth = defineStore("auth", {
           const user = userCredential.user;
         })
         .catch((error) => {
+          console.log(error);
           this.error = true;
         });
     },

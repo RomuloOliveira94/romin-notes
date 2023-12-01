@@ -87,7 +87,6 @@
       credentials.email = "";
       credentials.password = "";
     }
-    console.log("submit");
   };
 </script>
 

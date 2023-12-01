@@ -11,9 +11,11 @@ export const useStoreLang = defineStore("lang", {
   actions: {
     init() {
       this.lang = this.getPersistedLocale();
-      const { user } = useStoreAuth();
-      if (user?.id) {
+      const storeAuth = useStoreAuth();
+      if (storeAuth.user.id) {
         this.switchLanguage(this.lang || this.defaultLocale());
+      } else {
+        this.switchLanguage(this.defaultLocale());
       }
     },
     async switchLanguage(newLocale) {
@@ -38,10 +40,8 @@ export const useStoreLang = defineStore("lang", {
     currentLocale(newLocale) {
       i18n.global.locale.value = newLocale;
     },
-    clearLang() {
+    async clearLang() {
       this.lang = null;
-      delete localStorage["user-locale"];
-      this.switchLanguage(this.defaultLocale());
     },
   },
   getters: {
