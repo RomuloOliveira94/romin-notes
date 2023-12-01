@@ -35,12 +35,11 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
   const storeAuth = useStoreAuth();
-  if (!storeAuth.user?.id && to.name !== "auth") {
-    return { name: "auth" };
-  }
-
   if (storeAuth.user?.id && to.name === "auth") {
     return { name: "notes" };
+  }
+  if (!storeAuth.user?.id && to.name !== "auth") {
+    return { name: "auth" };
   }
 });
 
