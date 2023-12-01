@@ -12,6 +12,7 @@ import { useStoreNotes } from "./storeNotes";
 interface AuthState {
   user: User | null;
   error: boolean;
+  loading: boolean;
 }
 
 export const useStoreAuth = defineStore("auth", {
@@ -19,14 +20,15 @@ export const useStoreAuth = defineStore("auth", {
     return {
       user: null,
       error: false,
+      loading: false,
     };
   },
   actions: {
     init() {
       const storeNotes = useStoreNotes();
+      this.loading = true;
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log("login", user);
           this.user = {
             id: user.uid,
             email: user.email,
@@ -34,11 +36,11 @@ export const useStoreAuth = defineStore("auth", {
           storeNotes.init();
           this.router.push({ name: "notes" });
         } else {
-          console.log("logout", user);
           this.user = {};
           storeNotes.clearNotes();
           this.router.push({ name: "auth" });
         }
+        this.loading = false;
       });
     },
     async registerUser({ email, password }) {
