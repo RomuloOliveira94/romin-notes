@@ -1,0 +1,50 @@
+{
+  "titles": {
+    "app_title": "Romin Notes",
+    "title": "Notes"
+  },
+  "stats": {
+    "head_title_stats": "Stats",
+    "head_title_value": "Value",
+    "n_notes": "Number of notes",
+    "n_characters": "Number of characters",
+    "character": "character",
+    "characters": "characters"
+  },
+  "view_notes": {
+    "add_note": "Add New Note",
+    "no_notes": "No notes..."
+  },
+  "buttons": {
+    "cancel": "Cancel",
+    "save": "Save Note",
+    "delete": "Delete",
+    "edit": "Edit",
+    "title": "Notes"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "password": "Password",
+    "password_placeholder": "Enter your password"
+  },
+  "modals": {
+    "del_note_title": "Are you sure?",
+    "del_note_text": "You want to delete this note, will be deleted permanently?"
+  },
+  "forms": {
+    "note_form_title": "Note title",
+    "note_form_text": "Note text",
+    "note_form_text_placeholder": "Type your note here...",
+    "note_form_title_placeholder": "Type your note title here...",
+    "note_form_text_edit_placeholder": "Edit the note...",
+    "note_form_title_edit_placeholder": "Edit the title..."
+  },
+  "locale": {
+    "en": "English",
+    "br": "Portuguese"
+  }
+}

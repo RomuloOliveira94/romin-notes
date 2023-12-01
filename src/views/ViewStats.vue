@@ -3,29 +3,29 @@
     <table class="table is-fullwidth">
       <thead>
         <tr>
-          <th>Stat</th>
-          <th>Value</th>
+          <th>{{ $t("stats.head_title_stats") }}</th>
+          <th>{{ $t("stats.head_title_value") }}</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Number of notes</td>
+          <td>{{ $t("stats.n_notes") }}</td>
           <td>{{ storeNotes.totalNotesCount }}</td>
         </tr>
         <tr>
-          <td>Number of characters</td>
+          <td>{{ $t("stats.n_characters") }}</td>
           <td>{{ storeNotes.totalCharactersCount }}</td>
         </tr>
       </tbody>
     </table>
-    <input
+    <!-- <input
       v-model="loveRominNotes.content"
       class="input"
       type="text"
       placeholder="Do you like Romin Notes?"
       maxlength="100"
       v-autofocus
-    />
+    /> -->
   </div>
 </template>
 

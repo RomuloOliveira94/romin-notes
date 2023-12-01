@@ -2,12 +2,14 @@
   <div>
     <div class="p-3 mb-5 card" :class="`has-background-${props.bgColor}`">
       <div class="field">
-        <label :class="`label has-text-${props.textColor}`">Title</label>
+        <label :class="`label has-text-${props.textColor}`">{{
+          $t("forms.note_form_title")
+        }}</label>
         <div class="control">
           <input
             class="input"
             type="text"
-            placeholder="Note title"
+            :placeholder="placeholderTitle"
             ref="textAreaRef"
             v-model="modelValue.title"
             @input="$emit('update:modelValue', modelValue)"
@@ -17,7 +19,9 @@
         </div>
       </div>
       <div class="field">
-        <label :class="`label has-text-${props.textColor}`">Note</label>
+        <label :class="`label has-text-${props.textColor}`">{{
+          $t("forms.note_form_text")
+        }}</label>
         <div class="control">
           <textarea
             class="textarea"
@@ -39,26 +43,27 @@
 </template>
 
 <script setup lang="ts">
-import type { newNoteValue } from "@/types/NewNoteValue";
-import { ref } from "vue";
-import { vAutofocus } from "@/directives/vAutofocus";
+  import type { newNoteValue } from "@/types/NewNoteValue";
+  import { ref } from "vue";
+  import { vAutofocus } from "@/directives/vAutofocus";
 
-const textAreaRef = ref();
+  const textAreaRef = ref();
 
-const props = defineProps<{
-  modelValue: newNoteValue;
-  bgColor: string;
-  placeholderContent: string;
-  textColor: string;
-}>();
+  const props = defineProps<{
+    modelValue: newNoteValue;
+    bgColor: string;
+    placeholderContent: string;
+    placeholderTitle: string;
+    textColor: string;
+  }>();
 
-defineEmits(["update:modelValue"]);
+  defineEmits(["update:modelValue"]);
 
-const focusTextArea = () => {
-  textAreaRef.value.focus();
-};
+  const focusTextArea = () => {
+    textAreaRef.value.focus();
+  };
 
-defineExpose({
-  focusTextArea,
-});
+  defineExpose({
+    focusTextArea,
+  });
 </script>

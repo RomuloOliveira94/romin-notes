@@ -4,19 +4,20 @@
       v-model="noteContent"
       ref="addEditNoteRef"
       bg-color="primary"
-      placeholder-content="Edit the note"
+      :placeholder-content="$t('forms.note_form_text_edit_placeholder')"
+      :placeholder-title="$t('forms.note_form_title_edit_placeholder')"
       text-color="white"
     >
       <template #buttons>
         <button class="button is-link is-light mr-2" @click="$router.back()">
-          Cancel
+          {{ $t("buttons.cancel") }}
         </button>
         <button
           class="button is-link has-background-warning has-text-black"
           :disabled="!noteContent.title || !noteContent.content"
           @click="handleSaveEdit"
         >
-          Save Note
+          {{ $t("buttons.save") }}
         </button>
       </template>
     </AddEditNote>
@@ -24,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-  import { reactive, onMounted, ref } from "vue";
+  import { reactive, onMounted } from "vue";
   import AddEditNote from "../components/Notes/AddEditNote.vue";
   import { useStoreNotes } from "@/stores/storeNotes";
   import { useRoute, useRouter } from "vue-router";
