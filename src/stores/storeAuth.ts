@@ -8,6 +8,7 @@ import {
 import { auth } from "@/js/firebase";
 import { User } from "@/types/User";
 import { useStoreNotes } from "./storeNotes";
+import { useStoreLang } from "./storeLang";
 
 interface AuthState {
   user: User | null;
@@ -25,6 +26,7 @@ export const useStoreAuth = defineStore("auth", {
   },
   actions: {
     init() {
+      const storeLang = useStoreLang();
       const storeNotes = useStoreNotes();
       this.loading = true;
       onAuthStateChanged(auth, (user) => {
@@ -38,6 +40,7 @@ export const useStoreAuth = defineStore("auth", {
         } else {
           this.user = {};
           storeNotes.clearNotes();
+          storeLang.clearLang();
           this.router.push({ name: "auth" });
         }
         this.loading = false;

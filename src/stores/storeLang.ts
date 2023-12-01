@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useStoreAuth } from "./storeAuth";
 import i18n from "@/i18n";
 
 export const useStoreLang = defineStore("lang", {
@@ -10,7 +11,10 @@ export const useStoreLang = defineStore("lang", {
   actions: {
     init() {
       this.lang = this.getPersistedLocale();
-      this.switchLanguage(this.lang || this.defaultLocale());
+      const { user } = useStoreAuth();
+      if (user?.id) {
+        this.switchLanguage(this.lang || this.defaultLocale());
+      }
     },
     async switchLanguage(newLocale) {
       await this.currentLocale(newLocale);
@@ -33,6 +37,11 @@ export const useStoreLang = defineStore("lang", {
     },
     currentLocale(newLocale) {
       i18n.global.locale.value = newLocale;
+    },
+    clearLang() {
+      this.lang = null;
+      delete localStorage["user-locale"];
+      this.switchLanguage(this.defaultLocale());
     },
   },
   getters: {
